@@ -22,11 +22,11 @@ public class MyConfig {
 	@Bean
 	public DataSource dataSource() {
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
-		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/my_db?useSSL=false");
-		dataSource.setUser("bestuser");
-		dataSource.setPassword("bestuser");
 		try {
-			dataSource.setDriverClass("com.mysql.cj.jdb.Driver");
+			dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
+			dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/my_db?useSSL=false&serverTimeZone=UTC");
+			dataSource.setUser("bestuser");
+			dataSource.setPassword("bestuser");
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
@@ -40,7 +40,7 @@ public class MyConfig {
 		sessionFactory.setPackagesToScan("com.dmitriitrofimov.spring.rest.entity");
 
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.mySQLDialect");
+		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		hibernateProperties.setProperty("hibernate.show_sql", "true");
 		sessionFactory.setHibernateProperties(hibernateProperties);
 
